@@ -9,7 +9,7 @@ dataset$mood <- trimws(dataset$mood)
 dataset$mood <- tolower(dataset$mood)
 
 mood_filtered <- unique(dataset$mood)
-print(mood_filtered)
+print(mood_filtered)dsds
 
 movie <- ("Drive (2019)\n")
 #cat("Movie: ", movie)
