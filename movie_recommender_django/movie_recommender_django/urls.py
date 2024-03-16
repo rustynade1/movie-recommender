@@ -22,7 +22,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('movie_recommender.urls'))
+    path('api/', include('movie_recommender.urls')),
+    path('', include ('frontend.urls'))
     # path('suggest_movies/', AutocompleteView.as_view(), name='suggest_movies'),
     # path('recommend_movie/', recommend_movie, name='recommend_movie'),
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
