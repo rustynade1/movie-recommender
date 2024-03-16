@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "movie_recommender"
+    #"movie_recommender",
+    "movie_recommender.apps.MovieRecommenderConfig",
+    "rest_framework"
+    #"frontend.apps.FrontendConfig" TO BE ADDED WITH FRONTEND 
 ]
 
 MIDDLEWARE = [
