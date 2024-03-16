@@ -16,10 +16,12 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       movieTitle: '',
-      movieReview: ''
+      movieReviewContent: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleMovieTitleChange = this.handleMovieTitleChange.bind(this);
+    this.handleMovieReviewContentChange = this.handleMovieReviewContentChange.bind(this);
   }
 
   handleSubmit(e) {
@@ -28,7 +30,7 @@ export default class HomePage extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         movieTitle: this.state.movieTitle,
-        movieReview: this.state.movieReview,
+        movieReviewContent: this.state.movieReviewContent,
       }),
     };
     fetch("/api/recommend-movie", reviewDetails)
@@ -36,12 +38,29 @@ export default class HomePage extends Component {
       .then((data) => console.log(data));
   }
 
+  handleMovieTitleChange(e) {
+    this.setState({
+      movieTitle: e.target.value,
+    });
+  }
+
+  handleMovieReviewContentChange(e) {
+    this.setState({
+      movieReviewContent: e.target.value,
+    });
+  }
 
   render() {
     return (
       <FormControl>
-        <FormLabel>Enter Movie Title</FormLabel> <TextField />
-        <FormLabel>Enter Movie Review</FormLabel> <TextField />
+        <FormLabel>Enter Movie Title</FormLabel> 
+          <TextField 
+            onChange={this.handleMovieTitleChange}
+            defaultValue={''}/>
+        <FormLabel>Enter Movie Review</FormLabel> 
+          <TextField 
+            onChange={this.handleMovieReviewContentChange}
+            defaultValue={''}/>
         <Button onClick={this.handleSubmit}>Submit</Button>
       </FormControl>
     );

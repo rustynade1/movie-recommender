@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import AutocompleteView
+from .views import AutocompleteView, RecommendMovieView
 
 urlpatterns = [
-    path('room', AutocompleteView.as_view()),
+    path('recommend-movie', RecommendMovieView.as_view()),
 ]
