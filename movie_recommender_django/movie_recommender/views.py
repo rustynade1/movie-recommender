@@ -29,9 +29,10 @@ def recommend_movie (request):
         movie_review = request.POST.get('movie-review')
         result = r.movie_review(movie_title, "", movie_review)
         result = list(result)
-        return render(request, 'recommendation_results.html', {'reaction':result[0][0],'result': list(result[1])})
-    else:
-        return render(request, 'movie_review.html')
+    #     return render(request, 'recommendation_results.html', {'reaction':result[0][0],'result': list(result[1])})
+    # else:
+    #     return render(request, 'movie_review.html')
+    # new renders will be in the new frontend folder
 
 
 def suggest_items(request):
