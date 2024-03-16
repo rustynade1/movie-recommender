@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link,
   Redirect,
@@ -14,15 +14,7 @@ export default class HomePage extends Component {
 
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <p>This is the home page</p>
-          </Route>
-          {/* <Route path="/join" component={RoomJoinPage} />
-          <Route path="/create" component={CreateRoomPage} /> */}
-        </Switch>
-      </Router>
+      <h1>yoooo</h1>
     );
   }
 }

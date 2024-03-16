@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import HomePage from "./HomePage";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 
 export default class App extends Component {
   constructor(props) {
@@ -8,10 +15,14 @@ export default class App extends Component {
   }
 
   render() {
+    // return <p>yuh</p>;
     return (
-      <div>
-        <HomePage />
-      </div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} /> 
+            {/* <Route path="/about" element={<h1>yoooo2</h1>} /> */}
+          </Routes>
+        </Router>
     );
   }
 }
