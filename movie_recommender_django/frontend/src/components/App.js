@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import HomePage from "./HomePage";
+import SideBar from "./SideBar";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,12 +18,13 @@ export default class App extends Component {
   render() {
     // return <p>yuh</p>;
     return (
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} /> 
-            {/* <Route path="/about" element={<h1>yoooo2</h1>} /> */}
-          </Routes>
-        </Router>
+      <Router>
+        <SideBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} /> 
+          {/* <Route path="/about" element={<h1>yoooo2</h1>} /> */}
+        </Routes>
+      </Router>
     );
   }
 }
