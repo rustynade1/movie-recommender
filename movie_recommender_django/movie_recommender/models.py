@@ -7,3 +7,7 @@ class Movie(models.Model):
 
     class Meta:
         app_label = 'movie_recommender'
+
+class MovieReview(models.Model):
+    movieTitle = models.CharField(max_length=100)
+    movieReviewContent = models.TextField()
