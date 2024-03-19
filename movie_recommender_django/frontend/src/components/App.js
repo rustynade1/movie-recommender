@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import HomePage from "./HomePage";
 import SideBar from "./SideBar";
+import SearchMovies from "./SearchMovies";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
-  Redirect,
+  Navigate,
 } from "react-router-dom";
 
 export default class App extends Component {
@@ -21,8 +21,8 @@ export default class App extends Component {
       <Router>
         <SideBar />
         <Routes>
-          <Route path="/" element={<HomePage />} /> 
-          {/* <Route path="/about" element={<h1>yoooo2</h1>} /> */}
+          <Route path="/" element={<Navigate to="/search-movies" replace />} />
+          <Route path="/search-movies" element={<SearchMovies />} />
         </Routes>
       </Router>
     );

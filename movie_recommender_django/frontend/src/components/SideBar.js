@@ -3,6 +3,7 @@ import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import ContactsIcon from '@mui/icons-material/Contacts';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
  const [isExpanded, setIsExpanded] = useState(false);
@@ -14,11 +15,15 @@ const Sidebar = () => {
  const handleMouseLeave = () => {
     setIsExpanded(false);
  };
-
+ const listItems = [
+  { text: 'Search for Movies', path: '/search-movies', icon: <ContactsIcon /> },
+  { text: 'View Reviews', path: '/view-reviews', icon: <HomeIcon /> },
+  { text: 'View Recommendations', path: '/view-recommendations', icon: <PeopleIcon /> },
+];
  return (
     <Box
       sx={{
-        width: isExpanded ? 240 : 90,
+        width: isExpanded ? 300 : 90,
         height: '100vh',
         bgcolor: 'background.paper',
         overflow: 'auto',
@@ -29,15 +34,21 @@ const Sidebar = () => {
       onMouseLeave={handleMouseLeave}
     >
       <List>
-        {['View Reviews', 'Write a Revie', 'Search for Movies'].map((text, index) => (
-          <ListItem button key={text} sx={{ minHeight: '48px', fontsize: 'small'}}>
-            <ListItemIcon >
-              {index === 0 && <PeopleIcon />}
-              {index === 1 && <PeopleIcon />}
-              {index === 2 && <ContactsIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} sx={{ visibility: isExpanded ? 'visible' : 'hidden', whiteSpace: 'nowrap', overflow: 'hidden' }} />
-          </ListItem>
+        {listItems.map((item, index) => (
+          <Link to={item.path} key={item.text} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItem button sx={{ minHeight: '48px', fontSize: 'large'}}>
+              <ListItemIcon>
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText 
+                primary={item.text} 
+                sx={{ 
+                  visibility: isExpanded ? 'visible' : 'hidden', 
+                  whiteSpace: 'nowrap', 
+                  overflow: 'hidden',
+                }} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>
