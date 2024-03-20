@@ -14,6 +14,28 @@ const theme = createTheme({
             paper: '#424242'
         },
     },
+
+    typography: {
+        
+        movieTitle: {
+            fontSize: '6rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            fontFamily: 'Roboto Mono, monospace',
+        },
+        genre: {
+            fontSize: '1.5rem',
+            fontStyle: 'italic',
+            color: '#ffffff',
+            fontFamily: 'Roboto Mono, monospace',
+        },
+        description: {
+            fontSize: '1rem',
+            color: '#cccccc',
+            fontFamily: 'Roboto Mono, monospace',
+            
+        },
+    },
 });
 
 export default theme;
