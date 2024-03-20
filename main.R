@@ -10,9 +10,14 @@ dataset$movie_sentiment <- get_nrc_sentiment(dataset$description)
 
 # Sample review format (maybe add release year later)
 movie_review <- data.frame(
+
+  
+  title = "RRR (Hindi)",
+=======
   title = "G.I. Joe: Retaliation",
+
   status = "",
-  userText = "This movie kept me on edge throughout its runtime. It was so captivating. A wonderful film overall."
+  userText = "I hate it!"
 )
 
 cat("Sample Review:\n Title: ",movie_review$title,"\nReview: ",movie_review$userText,"\n\n")
@@ -27,7 +32,7 @@ desc_emotion <- get_nrc_sentiment(movie_desc)
 
 # Get sentiment from user review
 review_emotion <- get_nrc_sentiment(movie_review$userText)
-#print(review_emotion)
+print(review_emotion)
 
 # Sets status to recommended if the sentiment is detected as positive, not recommended otherwise
 if (review_emotion$positive > review_emotion$negative){
@@ -56,7 +61,7 @@ if (movie_review$status == "Recommended"){
   cosine_similarity <-  proxy::simil(x = as.matrix(sentiment_matrix), y = as.matrix(input_scores), method = "cosine")
   
   # Extract the top 5 most similar movies
-  top_indices <- order(cosine_similarity, decreasing = TRUE)[2:length(cosine_similarity)]  # excluding self-similarity
+  top_indices <- order(cosine_similarity, decreasing = TRUE)[2:length(cosine_similarity)]  # 2 because excluding self-similarity
   top_similar_movies <- dataset$names[top_indices]
   
   # Ensure at least 5 unique similar movies
@@ -71,6 +76,35 @@ if (movie_review$status == "Recommended"){
   # Display the top unique similar movies
   cat("Top 5 Similar Movies: \n")
   cat(paste(top_similar_movies,"\n"))
+
+  
+}else{
+  # Select the columns with sentiment scores (excluding the movie column)
+  sentiment_matrix <- dataset[, -1]
+  
+  # Find the sentiment scores for input movie
+  input_scores <- subset(dataset, dataset$names == movie_review$title)[,-1]
+  
+  # Calculate cosine similarity with input movie
+  cosine_similarity <-  proxy::simil(x = as.matrix(sentiment_matrix), y = as.matrix(input_scores), method = "cosine")
+  
+  # Extract the top 5 LEAST  similar movies
+  top_indices <- order(cosine_similarity)
+  top_notSimilar_movies <- dataset$names[top_indices]
+  
+  # Ensure at least 5 unique similar movies
+  while (length(unique(top_notSimilar_movies)) < 5 && length(top_indices) < length(cosine_similarity)) {
+    top_indices <- c(top_indices, which(!top_indices %in% top_indices))  # add the next index
+    top_notSimilar_movies <- dataset$names[top_indices]
+  }
+  
+  # Take the top 5 unique similar movies
+  top_similar_movies <- head(unique(top_notSimilar_movies), 5)
+  
+  # Display top 5 least similar movies
+  cat("We're sorry to here that. Perhaps these are more to your liking? \n")
+  cat(paste(top_similar_movies,"\n"))
+=======
 
 }
 
