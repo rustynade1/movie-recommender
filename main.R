@@ -1,5 +1,7 @@
 library(syuzhet)
 library(proxy)
+
+
 dataset <- read.csv("netflix_cleaned.csv")
 
 # Preliminary: add sentiment to all movies based on the description given
@@ -8,8 +10,12 @@ dataset$movie_sentiment <- get_nrc_sentiment(dataset$description)
 
 # Sample review format (maybe add release year later)
 movie_review <- data.frame(
+
   
   title = "RRR (Hindi)",
+=======
+  title = "G.I. Joe: Retaliation",
+
   status = "",
   userText = "I hate it!"
 )
@@ -70,6 +76,7 @@ if (movie_review$status == "Recommended"){
   # Display the top unique similar movies
   cat("Top 5 Similar Movies: \n")
   cat(paste(top_similar_movies,"\n"))
+
   
 }else{
   # Select the columns with sentiment scores (excluding the movie column)
@@ -97,6 +104,8 @@ if (movie_review$status == "Recommended"){
   # Display top 5 least similar movies
   cat("We're sorry to here that. Perhaps these are more to your liking? \n")
   cat(paste(top_similar_movies,"\n"))
+=======
+
 }
 
 

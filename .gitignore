@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+.idea
+__pycache__/
+.node
+node_modules/
+movie_recommender_django/db.sqlite3
