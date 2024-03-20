@@ -35,8 +35,7 @@ const WriteReview = () => {
 
                 <Box 
                     sx={{ 
-                        marginBottom: '16px',
-                        maxHeight: '40%', 
+                        marginBottom: '16px', 
                         height: '40%',
                         padding: '5px', width: '80%'
                     }}>
