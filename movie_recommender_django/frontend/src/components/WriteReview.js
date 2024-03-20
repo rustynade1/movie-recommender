@@ -13,7 +13,26 @@ const WriteReview = () => {
    
     const handleSubmitReview = () => {
        // Handle the review submission logic here
-       console.log('Review submitted:', reviewText);
+       console.log('Review submitted:', reviewText)
+        const reviewArray = []
+        const reviewData = {
+            title: 'Up',
+            userText: 'I love it'
+        }
+
+        reviewArray.push(reviewData)
+
+        const reviewDetails = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            reviewDetails: reviewArray
+          }),
+        };
+        fetch("/api/recommend-movie", reviewDetails)
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+
        // Reset the review text
        setReviewText('');
     };
