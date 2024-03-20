@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 
 
-
-
 const WriteReview = () => {
     const [reviewText, setReviewText] = useState('');
    
