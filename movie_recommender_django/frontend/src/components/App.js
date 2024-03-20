@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import SideBar from "./SideBar";
 import SearchMovies from "./SearchMovies";
+import WriteReview from "./WriteReview";
 import {
   BrowserRouter as Router,
   Routes,
@@ -23,6 +24,7 @@ export default class App extends Component {
         <Routes>
           <Route path="/" element={<Navigate to="/search-movies" replace />} />
           <Route path="/search-movies" element={<SearchMovies />} />
+          <Route path="/write-review/:id" element={<WriteReview />} />
         </Routes>
       </Router>
     );

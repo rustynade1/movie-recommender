@@ -48,7 +48,7 @@ export default class SearchMovies extends Component {
          />
          <List sx= {{display: 'flex', flexDirection: 'row'}}>
            {filteredMovies.map(movie => (
-             <ListItem button key={movie.id} component={Link} to={`/movie/${movie.id}`} 
+             <ListItem button key={movie.id} component={Link} to={`/write-review/${movie.id}`} 
                 sx={{ 
                   alignItems: 'center', 
                   width: 250, 

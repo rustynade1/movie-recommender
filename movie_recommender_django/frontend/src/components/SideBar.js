@@ -23,7 +23,7 @@ const Sidebar = () => {
  return (
     <Box
       sx={{
-        width: isExpanded ? 300 : 90,
+        width: isExpanded ? 350 : 90,
         height: '100vh',
         bgcolor: 'background.paper',
         overflow: 'auto',
