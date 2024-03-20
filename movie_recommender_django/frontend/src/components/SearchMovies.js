@@ -41,22 +41,30 @@ export default class SearchMovies extends Component {
       <ThemeProvider theme={theme}>
        <Box
          sx={{
-           padding: '4%',
            width: '100%',
            bgcolor: theme.palette.background.default,
-           paddingTop: '32px',
            overflowY: 'auto',
          }}
        >
-         <TextField
-           label="Search Movies"
-           variant="outlined"
-           value={searchTerm}
-           onChange={this.handleSearchChange}
-           
-           sx={{ marginBottom: '16px', width: '400px', }}
-         />
-        <List sx= {{display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent: "center"}}>
+        <Box 
+          sx={{
+            paddingTop: '32px', paddingBottom: '32px', paddingLeft: '4%',
+            width: '100%',
+            bgcolor: theme.palette.primary.dark,
+            overflowY: 'auto',
+          }}>
+
+          <TextField
+            label="Search Movies"
+            variant="outlined"
+            value={searchTerm}
+            onChange={this.handleSearchChange}
+            
+            sx={{  width: '400px', color: theme.palette.secondary.main}}
+          />
+        </Box>
+         
+        <List sx= {{display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent: "center", padding: '6%', paddingTop: '4%'}}>
           {filteredMovies.length > 0 ? (
             filteredMovies.map(movie => (
               <ListItem button key={movie.id} component={Link} to={`/write-review/${movie.id}`} 
@@ -66,8 +74,7 @@ export default class SearchMovies extends Component {
                   height: 450, 
                   flexDirection: 'column', 
                   padding: 0,
-                  marginRight: 6,
-                  marginBottom: 6,
+                  margin: 2,
                 }}>
                 <Paper 
                   sx={{ 

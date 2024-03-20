@@ -39,7 +39,7 @@ const Sidebar = () => {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          width: isExpanded ? 400 : 110,
+          width: isExpanded ? 400 : 100,
           height: '100vh',
           bgcolor: theme.palette.primary.main, // Use the main color from the theme
           overflow: 'auto',

@@ -4,7 +4,8 @@ from .views import index
 urlpatterns = [
     path('', index),
     path('search-movies', index),
-    path('write-review/<int:id>/', index)
+    path('write-review/<int:id>/', index),
+    path('view-recommendations', index)
     # path('join', index),
     # path('create', index),
     # path('join/1', index)
