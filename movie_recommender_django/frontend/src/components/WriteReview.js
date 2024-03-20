@@ -20,64 +20,93 @@ const WriteReview = () => {
 
     const defaultImage = "https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg";
 
-    const movie = { title: 'Movie 1', id: 1, genre: 'ariana grande', image: null }; // DONT FORGET TO CHANGE 
+    const movie = { title: 'Movie 1', id: 1, genre: 'ariana grande', image: null, description: 'When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.' }; // DONT FORGET TO CHANGE 
+
+    const backgroundStyle = `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${defaultImage || movie.image})`;
    
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ 
-                padding: '5%', 
-                maxWidth: '75%', 
-                width: '75%', 
+                // padding: '5%', 
+                width: '100%', hegiht: '100vh',
                 display: 'flex', 
-                flexDirection: 
-                'column', 
-                alignItems: 'flex-start' }}>
-            <Box sx= {{display: 'flex', flexDirection: 'row', width: '100%', paddingBottom: '5%'}}>
+                flexDirection: 'column', 
+                alignItems: 'flex-start',
+                bgcolor: theme.palette.background.default, 
+                
+                }}>
 
-                <Box 
-                    sx={{ 
-                        marginBottom: '16px', 
-                        height: '40%',
-                        padding: '5px', 
-                        width: '80%',
-                        marginRight: '10%'
-                    }}>
-                    <Typography variant='h2'> {movie.title} </ Typography>
-                    <Typography variant='h5'> {movie.genre} </Typography>
-                    <Typography variant='body2'> When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice. </Typography>
-                </Box>
-                <Box
-                    component="img"
-                    sx={{
-                        height: 400,
-                        width: 250, 
-                        maxHeight: '100%', 
-                        maxWidth: 350, 
-                        objectFit: 'cover',
-                        justify: 'flex-end'
-                    }}
-                    alt={movie.title}
-                    src={movie.image || defaultImage}
-                    />
+                <Box sx= {{
+                    display: 'flex', flexDirection: 'row', width: '100%', height: '40%', 
+                    paddingBottom: '5%',
+                    background: backgroundStyle,
+                }}>
+
+                    <Box 
+                        sx={{ 
+                            marginBottom: '16px', 
+                            height: '40%',
+                            maxHeight: '40%',
+                            paddingLeft: '10%', 
+                            paddingTop: '32px',
+                            width: '80%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            
+                        }}>
+                        <Typography variant='movieTitle'> {movie.title} </ Typography>
+                        <Typography variant='genre' sx={{paddingBottom: '25px'}}> {movie.genre} </Typography>
+                        <Typography variant='description' sx={{
+                            maxHeight: '20%', 
+                            width: '70%',
+                            // display: '-webkit-box',
+                            // WebkitLineClamp: 20,
+                            // WebkitBoxOrient: 'vertical',
+                            // textOverflow: 'ellipsis',
+                            // overflow: 'hidden'
+                        }}>
+                            {movie.description} 
+                        </Typography>
+                    </Box>
+                    {/* <Box
+                        component="img"
+                        sx={{
+                            height: 400,
+                            width: 250, 
+                            maxHeight: '100%', 
+                            maxWidth: 350, 
+                            objectFit: 'cover',
+                            justify: 'flex-end'
+                        }}
+                        alt={movie.title}
+                        src={movie.image || defaultImage}
+                        /> */}
                 </Box>
                 
-                <TextField
-                    label="Write your review"
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                    value={reviewText}
-                    onChange={handleReviewChange}
-                    fullWidth
-                />
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmitReview}
-                    sx={{ marginTop: '16px' }}
-                >
-                    Submit Review
-                </Button>
+                <Box sx={{
+                        paddingLeft: '20%', paddingTop: '3%', 
+                        width: '60%',
+                        display: 'flex', flexDirection: 'column', alignItems: 'flex-end'
+                    }}>
+                    <TextField
+                        label="Write your review"
+                        multiline
+                        rows={7}
+                        variant="outlined"
+                        value={reviewText}
+                        onChange={handleReviewChange}
+                        fullWidth
+                    />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSubmitReview}
+                        sx={{ marginTop: '16px' }}
+                    >
+                        Submit Review
+                    </Button>
+                </Box>
+                
             </Box>
         </ThemeProvider>
         
