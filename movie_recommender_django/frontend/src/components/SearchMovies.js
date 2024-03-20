@@ -13,6 +13,12 @@ export default class SearchMovies extends Component {
        movies: [
          { title: 'Movie 1', id: 1, genre: 'ariana grande' },
          { title: 'Movie 2', id: 2, genre: 'gaming'},
+         { title: 'Movie 2', id: 2, genre: 'gaming'},
+         { title: 'Movie 2', id: 2, genre: 'gaming'},
+         { title: 'Movie 2', id: 2, genre: 'gaming'},
+         { title: 'Movie 2', id: 2, genre: 'gaming'},
+         { title: 'Movie 2', id: 2, genre: 'gaming'},
+         { title: 'Movie 2', id: 2, genre: 'gaming'},
        ],
      };
   }
@@ -39,6 +45,7 @@ export default class SearchMovies extends Component {
            width: '100%',
            bgcolor: theme.palette.background.default,
            paddingTop: '32px',
+           overflowY: 'auto',
          }}
        >
          <TextField
@@ -49,13 +56,13 @@ export default class SearchMovies extends Component {
            
            sx={{ marginBottom: '16px', width: '400px', }}
          />
-        <List sx= {{display: 'flex', flexDirection: 'row'}}>
+        <List sx= {{display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent: "center"}}>
           {filteredMovies.length > 0 ? (
             filteredMovies.map(movie => (
               <ListItem button key={movie.id} component={Link} to={`/write-review/${movie.id}`} 
                 sx={{ 
                   alignItems: 'center', 
-                  width: 350, 
+                  width: 300, 
                   height: 450, 
                   flexDirection: 'column', 
                   padding: 0,

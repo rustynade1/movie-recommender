@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
-
+import Paper from '@mui/material/Paper';
+import theme from './theme';
+import { ThemeProvider } from '@mui/material/styles';
 
 const WriteReview = () => {
     const [reviewText, setReviewText] = useState('');
@@ -21,7 +23,8 @@ const WriteReview = () => {
     const movie = { title: 'Movie 1', id: 1, genre: 'ariana grande', image: null }; // DONT FORGET TO CHANGE 
    
     return (
-        <Box sx={{ 
+        <ThemeProvider theme={theme}>
+            <Box sx={{ 
                 padding: '5%', 
                 maxWidth: '75%', 
                 width: '75%', 
@@ -56,26 +59,28 @@ const WriteReview = () => {
                     alt={movie.title}
                     src={movie.image || defaultImage}
                     />
+                </Box>
+                
+                <TextField
+                    label="Write your review"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    value={reviewText}
+                    onChange={handleReviewChange}
+                    fullWidth
+                />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmitReview}
+                    sx={{ marginTop: '16px' }}
+                >
+                    Submit Review
+                </Button>
             </Box>
-            
-            <TextField
-                label="Write your review"
-                multiline
-                rows={4}
-                variant="outlined"
-                value={reviewText}
-                onChange={handleReviewChange}
-                fullWidth
-            />
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmitReview}
-                sx={{ marginTop: '16px' }}
-            >
-                Submit Review
-            </Button>
-       </Box>
+        </ThemeProvider>
+        
     );
 };
    
