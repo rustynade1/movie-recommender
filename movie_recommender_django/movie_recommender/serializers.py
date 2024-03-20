@@ -5,4 +5,4 @@ from .models import MovieReview
 class RecommendMovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = MovieReview
-        fields = ('movieTitle', 'movieReviewContent')
+        fields = ('title', 'userInput')
