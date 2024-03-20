@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, Button, Typography } from '@mui/material';
 
 
 
@@ -37,12 +37,13 @@ const WriteReview = () => {
                     sx={{ 
                         marginBottom: '16px', 
                         height: '40%',
-                        padding: '5px', width: '80%'
+                        padding: '5px', 
+                        width: '80%',
+                        marginRight: '10%'
                     }}>
-                    <h2>Jumanji</h2>
-                    <p>Action</p>
-                    <p>When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.
-</p>
+                    <Typography variant='h2'> {movie.title} </ Typography>
+                    <Typography variant='h5'> {movie.genre} </Typography>
+                    <Typography variant='body2'> When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice. </Typography>
                 </Box>
                 <Box
                     component="img"
