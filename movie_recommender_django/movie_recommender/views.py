@@ -71,27 +71,22 @@ class RecommendMovieView(APIView):
         data_to_append = request.data.get('reviewDetails')
 
         empty = os.stat(csv_file_path).st_size == 0
-
-        # Open the CSV file in append mode
-        with open(csv_file_path, mode='a', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=data_to_append[0].keys())
-
-            if empty:
-                writer.writeheader()
-            writer.writerows(data_to_append)
-
+        print(data_to_append)
         current_reviews = []
 
-        # Open the CSV file
-        with open(csv_file_path, mode='r', newline='') as file:
+        if empty:
+            current_reviews.append(data_to_append[0])
+        else:
+            # Open the CSV file
+            current_reviews.append(data_to_append[0])
+            with open(csv_file_path, mode='r', newline='') as file:
 
-            reader = csv.DictReader(file)
+                reader = csv.DictReader(file)
 
-            next(reader)
+                for row in reader:
+                    current_reviews.append(row)
 
-            for row in reader:
-                current_reviews.append(row)
-
+        print(current_reviews)
         review_details = current_reviews
         print(review_details)
         serialized_review_details = json.dumps(review_details)
@@ -104,6 +99,27 @@ class RecommendMovieView(APIView):
 
         # Parse the JSON string into a Python list
         result_list = json.loads(json_output)
+
+        new_review_obj = data_to_append
+        new_review_obj[0]['recommendations'] = result_list
+
+        print (new_review_obj)
+
+        if empty:
+            # Open the CSV file in append mode
+            with open(csv_file_path, mode='a', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames=new_review_obj[0].keys())
+                writer.writeheader()
+                writer.writerows(data_to_append)
+        else:
+            current_reviews.append(new_review_obj)
+            with open(csv_file_path, mode='w', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames=current_reviews[0].keys())
+                writer.writeheader()
+
+                #for review in current_reviews:
+                    #writer.writerows(review)
+                writer.writerows(current_reviews)
 
         # Now result_list is a Python list containing the data returned by the R script
         print(result_list)
