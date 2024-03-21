@@ -47,6 +47,11 @@ def read_csv_file(file_path):
         data = [row for row in reader]
     return data
 
+def past_reviews(request):
+    #logic for determining recommendations here
+    #link for missing incase need https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg
+    return render(request, 'past_reviews.html', ) # {'reaction':result[0][0],'result': list(result[1])} similar to this 
+
 class AutocompleteView(View):
     def get(self, request):
         query = request.GET.get('term', '')
