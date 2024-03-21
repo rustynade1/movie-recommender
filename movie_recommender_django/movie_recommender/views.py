@@ -105,11 +105,12 @@ class RecommendMovieView(APIView):
 
         print (new_review_obj)
 
-        if empty:
+        if current_reviews:
             # Open the CSV file in append mode
             with open(csv_file_path, mode='a', newline='') as file:
                 writer = csv.DictWriter(file, fieldnames=new_review_obj[0].keys())
-                writer.writeheader()
+                if empty:
+                    writer.writeheader()
                 writer.writerows(data_to_append)
         else:
             current_reviews.append(new_review_obj)

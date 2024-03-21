@@ -16,7 +16,9 @@ const WriteReview = () => {
        console.log('Review submitted:', reviewText)
         const reviewArray = []
         const reviewData = {
-            id: '60176',
+            // 918940 - The Legend of Tarzan
+            // 70047 - The Exorcist
+            id: '918940',
             userText: reviewText
         }
 

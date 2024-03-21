@@ -104,13 +104,13 @@ export default class ViewReviews extends Component {
                                     alt={movie.title}
                                     src={movie.image || defaultImage}
                                 />
-                                <Box 
+                                /*<Box
                                     sx={{
                                         borderRadius: '4px',
                                         margin: 0, padding: 0,
-                                        width: "100%", 
+                                        width: "100%",
                                         display: 'flex',
-                                        flexDirection: 'column', 
+                                        flexDirection: 'column',
                                         marginRight: 0,
                                     }}>
                                     <ListItemText primary={movie.title} secondary={movie.genre} sx={{padding: 2}}/>
@@ -122,17 +122,17 @@ export default class ViewReviews extends Component {
                                     <List sx={{display: 'flex', flexWrap: 'wrap', paddingTop: 0}}>
                                         {relatedMovies.map((relatedMovie) => (
                                             <Typography key={relatedMovie.title} component={Link} to={`/write-review/${encodeURIComponent(relatedMovie.title.toLowerCase().replace(/\s+/g, '-'))}`}
-                                            sx={{ 
-                                                '&:hover': { textDecoration: 'underline' }, 
-                                                marginRight: 2, 
-                                                color: theme.palette.background.paper, 
+                                            sx={{
+                                                '&:hover': { textDecoration: 'underline' },
+                                                marginRight: 2,
+                                                color: theme.palette.background.paper,
                                             }}>
                                             {relatedMovie.title}
                                         </Typography>
                                         ))}
                                     </List>
                                     </Box>
-                                    
+
                                 </Box>
                             </Paper>
                         </ListItem>
