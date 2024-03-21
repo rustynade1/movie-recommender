@@ -56,10 +56,10 @@ recommend_movies <- function (review_array) {
 
   # -- COLLABORATIVE FILTERING --
   # Load CSV Files
-  movies_df <- read.csv("../movies_metadata.csv", header = TRUE)
-  ratings_df <- read.csv("../ratings_small.csv", header = TRUE)
-  links_df <- read.csv("../links_small.csv", header = TRUE)
-  movies_df <- movies_df[, c("title", "imdb_id")]
+  movies_df <- read.csv("../movies_metadata.csv", header = TRUE, fileEncoding = "UTF-8")
+  ratings_df <- read.csv("../ratings_small.csv", header = TRUE, fileEncoding = "UTF-8")
+  links_df <- read.csv("../links_small.csv", header = TRUE, fileEncoding = "UTF-8")
+  movies_df <- movies_df[, c("title", "imdb_id", "poster_path")]
   ratings_df <- ratings_df[, c("userId", "movieId", "rating")]
 
   # Match the IMDB ID format in links_df
@@ -71,14 +71,14 @@ recommend_movies <- function (review_array) {
   link_ratings_df <- merge(movies_link_df, ratings_df, by = "movieId")
 
   # Check for NA values
-  na_df <- link_ratings_df[!complete.cases(link_ratings_df), ]
+  # na_df <- link_ratings_df[!complete.cases(link_ratings_df), ]
   #print(na_df)
 
   # Order dataframe by userId
   ordered_df <- link_ratings_df[order(link_ratings_df$userId),]
 
   # Rearrange columns
-  rearranged_df <- ordered_df[,c("userId", "title", "rating")]
+  rearranged_df <- ordered_df[,c("userId", "imdb_id", "rating")]
 
   # -- MACHINE LEARNING --
 
@@ -89,8 +89,8 @@ recommend_movies <- function (review_array) {
   append_user_review <- function(user_index, df){
     df_copy <- df
     for (i in 1:nrow(review_array)) {
-      movie_title <- review_array[i, "title"]
-      user_input <- data.frame(userId = user_index+1, title = movie_title, rating = ratings_arr[i])
+      imdb_id <- review_array[i, "id"]
+      user_input <- data.frame(userId = user_index+1, imdb_id = imdb_id, rating = ratings_arr[i])
       df_copy <- rbind(df_copy,user_input)
     }
     return(df_copy)
@@ -124,7 +124,11 @@ recommend_movies <- function (review_array) {
   top_movies_of_user <- as(prediction_w_user, "list")
 
   top_movies_list <- as.list(top_movies_of_user[last_value+1])
-  print(toJSON(top_movies_list))
+
+  top_movies_list <- unlist(top_movies_list)
+
+  matched_records <- movies_df[movies_df$imdb_id %in% top_movies_list, ]
+  print(toJSON(matched_records))
 }
 
 # Read command-line arguments

@@ -66,13 +66,39 @@ class AutocompleteView(View):
 
 class RecommendMovieView(APIView):
     def post(self, request, format=None):
+        csv_file_path = 'past_reviews.csv'
 
-        review_details = request.data.get('reviewDetails')
+        data_to_append = request.data.get('reviewDetails')
+
+        empty = os.stat(csv_file_path).st_size == 0
+
+        # Open the CSV file in append mode
+        with open(csv_file_path, mode='a', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=data_to_append[0].keys())
+
+            if empty:
+                writer.writeheader()
+            writer.writerows(data_to_append)
+
+        current_reviews = []
+
+        # Open the CSV file
+        with open(csv_file_path, mode='r', newline='') as file:
+
+            reader = csv.DictReader(file)
+
+            next(reader)
+
+            for row in reader:
+                current_reviews.append(row)
+
+        review_details = current_reviews
         print(review_details)
         serialized_review_details = json.dumps(review_details)
         print(serialized_review_details)
         result = subprocess.run(['C:/Program Files/R/R-4.3.3/bin/x64/Rscript', 'C:/Users/ASUS/Documents/GitHub/movie-recommender-2/movie_recommender_django/movie_recommender/collab_filtering.r', serialized_review_details], capture_output=True,
                             text=True)
+        print(result.stdout)
         # Assuming result.stdout contains the JSON string
         json_output = result.stdout
 

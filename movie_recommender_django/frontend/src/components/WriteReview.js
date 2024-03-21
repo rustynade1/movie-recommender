@@ -16,12 +16,11 @@ const WriteReview = () => {
        console.log('Review submitted:', reviewText)
         const reviewArray = []
         const reviewData = {
-            title: 'Up',
-            userText: 'I love it'
+            id: '60176',
+            userText: reviewText
         }
 
         reviewArray.push(reviewData)
-
         const reviewDetails = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
