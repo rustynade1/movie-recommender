@@ -21,8 +21,10 @@ from movie_recommender.views import suggest_items
 from django.conf.urls.static import static
 from django.conf import settings
 from movie_recommender.views import AutocompleteView
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('suggest_movies/', AutocompleteView.as_view(), name='suggest_movies'),
     path('recommend_movie/', recommend_movie, name='recommend_movie'),
+    path('', RedirectView.as_view(url='recommend_movie/'), name='home-redirect'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
