@@ -38,7 +38,7 @@ const WriteReview = () => {
 
     const defaultImage = "https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg";
 
-    const movie = { title: 'Movie 1', id: 1, genre: 'ariana grande', image: null, description: 'When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.' }; // DONT FORGET TO CHANGE 
+    const movie = { title: 'Movie 1', id: 1, genre: 'comedy', image: null, description: 'When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.When the menace known achaos on the people of e.ce.' }; // DONT FORGET TO CHANGE 
 
     const backgroundStyle = `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${defaultImage || movie.image})`;
    

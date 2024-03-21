@@ -10,7 +10,7 @@ export default class ViewRecommendations extends Component {
      super(props);
      this.state = {
        movies: [
-         { title: 'Movie 1', id: 1, genre: 'ariana grande' },
+         { title: 'Movie 1', id: 1, genre: 'comedy' },
          { title: 'Movie 2', id: 2, genre: 'gaming'},
          { title: 'Movie 2', id: 2, genre: 'gaming'},
          { title: 'Movie 2', id: 2, genre: 'gaming'},

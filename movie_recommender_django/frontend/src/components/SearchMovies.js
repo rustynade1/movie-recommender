@@ -11,7 +11,7 @@ export default class SearchMovies extends Component {
      this.state = {
        searchTerm: '',
        movies: [
-         { title: 'Movie 1', id: 1, genre: 'ariana grande' },
+         { title: 'Movie 1', id: 1, genre: 'comedy' },
          { title: 'Movies, 2', id: 2, genre: 'gaming'},
          { title: 'Movie! 2', id: 2, genre: 'gaming'},
          { title: 'Movie@ 2', id: 2, genre: 'gaming'},
