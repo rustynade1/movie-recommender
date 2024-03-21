@@ -48,7 +48,7 @@ def read_csv_file(file_path):
     return data
 
 def past_reviews(request):
-    #logic for determining recommendations here
+    #state previous reviews here
     #link for missing incase need https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg
     return render(request, 'past_reviews.html', ) # {'reaction':result[0][0],'result': list(result[1])} similar to this 
 
