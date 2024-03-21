@@ -12,9 +12,9 @@ export default class SearchMovies extends Component {
        searchTerm: '',
        movies: [
          { title: 'Movie 1', id: 1, genre: 'ariana grande' },
-         { title: 'Movie 2', id: 2, genre: 'gaming'},
-         { title: 'Movie 2', id: 2, genre: 'gaming'},
-         { title: 'Movie 2', id: 2, genre: 'gaming'},
+         { title: 'Movies, 2', id: 2, genre: 'gaming'},
+         { title: 'Movie! 2', id: 2, genre: 'gaming'},
+         { title: 'Movie@ 2', id: 2, genre: 'gaming'},
          { title: 'Movie 2', id: 2, genre: 'gaming'},
          { title: 'Movie 2', id: 2, genre: 'gaming'},
          { title: 'Movie 2', id: 2, genre: 'gaming'},
@@ -67,7 +67,7 @@ export default class SearchMovies extends Component {
         <List sx= {{display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent: "center", padding: '6%', paddingTop: '4%'}}>
           {filteredMovies.length > 0 ? (
             filteredMovies.map(movie => (
-              <ListItem button key={movie.id} component={Link} to={`/write-review/${movie.id}`} 
+              <ListItem button key={movie.title} component={Link} to={`/write-review/${encodeURIComponent(movie.title.toLowerCase().replace(/\s+/g, '-'))}`} 
                 sx={{ 
                   alignItems: 'center', 
                   width: 300, 

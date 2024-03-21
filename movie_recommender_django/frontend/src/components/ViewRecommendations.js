@@ -41,7 +41,7 @@ export default class ViewRecommendations extends Component {
                 paddingTop: '32px',
                 overflowY: 'auto',
             }}
-        >   <Box sx={{display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent: "center", bg }}>
+        >   <Box sx={{display: 'flex', flexWrap: 'wrap', alignItems: "center", justifyContent: "center" }}>
                 <Typography variant='movieTitle' > Give These Movies a Shot </Typography>
             </Box>
             

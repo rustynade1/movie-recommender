@@ -4,6 +4,7 @@ import SideBar from "./SideBar";
 import SearchMovies from "./SearchMovies";
 import WriteReview from "./WriteReview";
 import ViewRecommendations from "./ViewRecommendations";
+import ViewReviews from "./ViewReviews";
 // import theme from './theme';
 import {
   BrowserRouter as Router,
@@ -30,6 +31,7 @@ export default class App extends Component {
             <Route path="/search-movies" element={<SearchMovies />} />
             <Route path="/write-review/:id" element={<WriteReview />} />
             <Route path="/view-recommendations" element={<ViewRecommendations />} />
+            <Route path="/view-reviews" element={<ViewReviews />} />
           </Routes>
         </Router>
       // </ThemeProvider>
