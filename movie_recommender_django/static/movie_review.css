@@ -39,3 +39,17 @@ form {
 .fa {
     margin-right: 1em
 }
+
+.ui-autocomplete {
+    background-color: rgba(0, 0, 0, 0.7); /* Translucent dark background */
+    color: white; /* Text color */
+    border: 1px solid #ccc; /* Optional: Add a border */
+}
+
+.ui-autocomplete .ui-menu-item {
+    border-bottom: 1px solid #ccc; /* Optional: Add a border between items */
+}
+
+.ui-autocomplete .ui-menu-item:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
