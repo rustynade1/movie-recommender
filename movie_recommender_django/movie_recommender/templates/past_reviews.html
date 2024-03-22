@@ -68,26 +68,25 @@
     </div>
   </nav>
   <h1 id="title-h1">Previous Reviews</h1>
-  {% comment %}
   <ol>
     {% for item in reviews %}
     <li>
       <div
         class="review-item"
-        style="background-image: url('{{ item.poster_image_url }}');"
+        style="background-image: url('{{ item.poster_path }}');"
       >
         <div class="review-details">
           <h3>{{ item.title }}</h3>
           <p>{{ item.genre }} | {{ item.rating }}</p>
-          <p>{{ item.review_text|truncatewords:10 }}</p>
+          <p>{{ item.userText|truncatewords:10 }}</p>
         </div>
       </div>
     </li>
     {% endfor %}
   </ol>
-  {% endcomment %}
   <ol>
     <li>
+      {%comment%}
       <div
         class="review-item"
         style="
@@ -120,6 +119,7 @@
           </p>
         </div>
       </div>
+      {%endcomment%}
     </li>
   </ol>
 </body>

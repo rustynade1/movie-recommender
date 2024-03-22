@@ -120,17 +120,18 @@ recommend_movie <- function (review_array){
       print(ratings_arr[i])
       movie_title <- review_array[i, "title"]
       user_input <- data.frame(userId = user_index+1, title = movie_title, rating = ratings_arr[i])
-      ratings_info <- append(ratings_info, user_index)
       df_copy <- rbind(df_copy,user_input) 
     }
     return(df_copy)
   }
 
-  ratings_info <- list()
+  ratings_info <- data.frame()
   for (i in 1:nrow(review_array)) {
       movie_title <- review_array[i, "title"]
-      user_input <- data.frame(title = movie_title, rating = ratings_arr[i])
-      ratings_info <- append(ratings_info, user_input)
+      genre <- movies_df[movies_df$title %in% movie_title, c('genres')]
+      poster_path <- movies_df[movies_df$title %in% movie_title, c('poster_path')]
+      user_input <- data.frame(title = movie_title, rating = ratings_arr[i], genre = genre, poster_path = poster_path)
+      ratings_info <- rbind(ratings_info, user_input)
   }
 
   rearranged_df <- append_user_review(last_value, rearranged_df)

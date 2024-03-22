@@ -37,7 +37,10 @@ def recommend_movie (request):
         review1 = {
             "title": movie_title,
             "userText": movie_review,
-            "recommendations": []
+            "recommendations": [],
+            "rating": 0,
+            "poster_path": "",
+            "genre": ""
         }
 
         empty = os.stat(csv_file_path).st_size == 0
@@ -68,23 +71,28 @@ def recommend_movie (request):
 
         reviews_json = json.dumps(current_reviews)
         result = r.recommend_movie(reviews_json)
+        result_list = str(result)
+        result_json = json.loads(result_list)
+        print("RESULT")
+        print(result_json[0][0])
+        print(type(result_json[0][0]['genre']))
+        print(result_json[0][0]['poster_path'])
+        genre_string = result_json[0][0]['genre'].replace("'", '"')
+        genre_json = json.loads(str(genre_string))
 
         # Write down recommendations
-        for review in current_reviews:
-            if review['title'] == movie_title:
-                review['recommendations'] = result
-                break
+        for i in range(len(current_reviews)):
+            # current_reviews[i]['recommendations'] = result_json[1]
+            # current_reviews[i]['rating'] = result_json[0][0]['rating'][0]
+            # current_reviews[i]['poster_path'] = "https://image.tmdb.org/t/p/original" + result_json[0][0]['poster_path'][0]
+            # current_reviews[i]['genre'] = genre_json[0]['name']
+            break
 
         # Rewrite past_reviews file
         with open(csv_file_path, mode='w', newline='', encoding='cp1252') as file:
             writer = csv.DictWriter(file, fieldnames=current_reviews[0].keys())
             writer.writeheader()
             writer.writerows(current_reviews)
-
-        result_list = str(result)
-        result_json = json.loads(result_list)
-
-        print(type(result_json[0]))
 
         titles = [item['title'] for item in result_json[1]]
         return render(request, 'recommendation_results.html', {'reaction':"Awesome! Here are some movies that are watched by users like you!",'result': titles})
@@ -108,7 +116,16 @@ def read_csv_file(file_path):
 def past_reviews(request):
     #state previous reviews here
     #link for missing incase need https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg
-    return render(request, 'past_reviews.html', ) # {'reaction':result[0][0],'result': list(result[1])} similar to this 
+    past_reviews = []
+    with open(csv_file_path, mode='r', newline='', encoding='cp1252') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            past_reviews.append(row)
+
+    print("PAST REVIEWS:")
+    print(past_reviews[0]['userText'])
+
+    return render(request, 'past_reviews.html', {'reviews': past_reviews}) # {'reaction':result[0][0],'result': list(result[1])} similar to this
 
 def recommendations_page(request):
     #state list of recommended movies here
