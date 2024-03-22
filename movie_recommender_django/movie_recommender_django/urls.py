@@ -19,6 +19,7 @@ from django.urls import path
 from movie_recommender.views import recommend_movie
 from movie_recommender.views import suggest_items
 from movie_recommender.views import past_reviews
+from movie_recommender.views import recommendations_page
 from django.conf.urls.static import static
 from django.conf import settings
 from movie_recommender.views import AutocompleteView
@@ -28,5 +29,6 @@ urlpatterns = [
     path('suggest_movies/', AutocompleteView.as_view(), name='suggest_movies'),
     path('recommend_movie/', recommend_movie, name='recommend_movie'),
     path('', RedirectView.as_view(url='recommend_movie/'), name='home-redirect'),
-    path('past_reviews/', past_reviews, name='past_reviews')
+    path('past_reviews/', past_reviews, name='past_reviews'),
+    path('recommendations_page/', recommendations_page, name='recommendations_page'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
