@@ -34,3 +34,8 @@ body {
     padding-top: 5%;
     margin-bottom: 5%;
 }
+
+#movie-review-h1 {
+    color: 	#E50914;
+    font-family: 'Rammetto One';
+}
