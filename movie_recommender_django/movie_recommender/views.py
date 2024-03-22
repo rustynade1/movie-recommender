@@ -6,16 +6,19 @@ from django.views import View
 
 from django.http import JsonResponse
 from .models import Movie
+import pandas as pd
+from rpy2.robjects import pandas2ri
 
 import os
 import csv
+import json
 
 print("Current working directory:", os.getcwd())
 from rpy2.robjects import conversion, default_converter
 
 # Create your views here.
 current_file_path = os.path.abspath(__file__)
-r_script_path = os.path.join(os.path.dirname(current_file_path), 'r_scripts', 'movie_review_script.R')
+r_script_path = os.path.join(os.path.dirname(current_file_path), 'r_scripts', 'collab_filtering_w_import.R')
 
 def recommend_movie (request):
     print(settings.BASE_DIR)
@@ -25,11 +28,30 @@ def recommend_movie (request):
     r(r_script)
 
     if request.method == 'POST':
+
+        pandas2ri.activate()
+
         movie_title = request.POST.get('movie-title')
         movie_review = request.POST.get('movie-review')
-        result = r.movie_review(movie_title, "", movie_review)
-        result = list(result)
-        return render(request, 'recommendation_results.html', {'reaction':result[0][0],'result': list(result[1])})
+
+        reviews_list = []
+
+        review1 = {
+            "title": movie_title,
+            "userText": movie_review
+        }
+
+        review2 = {
+            "title": "Up",
+            "userText": "Breathtaking"
+        }
+
+        reviews_list.append(review1)
+        reviews_list.append(review2)
+
+        reviews_json = json.dumps(reviews_list)
+        result = r.recommend_movie(reviews_json)
+        return render(request, 'recommendation_results.html', {'reaction':"Awesome! Here are some movies that are watched by users like you!",'result': list(result)})
     else:
         return render(request, 'movie_review.html')
 

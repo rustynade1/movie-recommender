@@ -6,6 +6,7 @@ library(stopwords)
 library(lares)
 library(dplyr)
 library(recommenderlab)
+library(jsonlite)
 
 # -- USER INPUT --
 # * array of objects where objects contain:
@@ -29,7 +30,8 @@ movie_review3 <- data.frame(
 
 # [FUNCTION]: Accepts an array of review objects as input and returns 5 movie recommendations
 recommend_movie <- function (review_array){
-  
+
+  review_array <- fromJSON (review_array)
   
   # -- DATA CLEANING --
   
@@ -76,12 +78,13 @@ recommend_movie <- function (review_array){
   ratings_arr <- review_cleaning(review_array)
   
   # -- COLLABORATIVE FILTERING --
-  
+  print(getwd())
+  print("Reading files")
   # Load CSV Files
-  movies_df <- read.csv("movies_metadata.csv", header = TRUE)
-  ratings_df <- read.csv("ratings_small.csv", header = TRUE)
-  links_df <- read.csv("links_small.csv", header = TRUE)
-  
+  movies_df <- read.csv("./movie_recommender/r_scripts/movies_metadata.csv", header = TRUE)
+  ratings_df <- read.csv("./movie_recommender/r_scripts/ratings_small.csv", header = TRUE)
+  links_df <- read.csv("./movie_recommender/r_scripts/links_small.csv", header = TRUE)
+
   
   movies_df <- movies_df[!duplicated(movies_df$title), ]
   movies_df <- movies_df[, c("title", "imdb_id")]
@@ -136,8 +139,8 @@ recommend_movie <- function (review_array){
   
   users <- names(rowCounts(filtered_rating_matrix))
   print(filtered_rating_matrix)
-  
-  recommending_model <- readRDS("cf_model.rds")
+  print(getwd())
+  recommending_model <- readRDS("./movie_recommender/r_scripts/cf_model.rds")
   
   # -- RESULTS --
   #print("Making matrix")
