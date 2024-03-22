@@ -55,6 +55,15 @@ def past_reviews(request):
 class AutocompleteView(View):
     def get(self, request):
         query = request.GET.get('term', '')
-        data = read_csv_file('movie_recommender/r_scripts/netflix_cleaned.csv')
-        filtered_data = [item[0] for item in data if item[0].lower().startswith(query.lower())]
+        data = read_csv_file('movie_recommender/r_scripts/movie_selection.csv')
+
+        filtered_data = []
+
+        for item in data:
+            if item[0].lower().startswith(query.lower()):
+                filtered_data.append(item[0])
+                # Stop adding items if filtered_data reaches the maximum length
+                if len(filtered_data) == 10:
+                    break
+
         return JsonResponse(filtered_data, safe=False)
