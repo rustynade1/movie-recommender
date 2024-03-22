@@ -2,6 +2,8 @@
     position: relative;
     background-size: cover;
     background-position: center;
+    width: 400px;
+    height: 350px;
 }
    
 .review-details {
@@ -33,9 +35,22 @@ body {
     font-family: 'Noto Sans Mono' !important;
     padding-top: 5%;
     margin-bottom: 5%;
+    width: 100%;
 }
 
 #movie-review-h1 {
     color: 	#E50914;
     font-family: 'Rammetto One';
+}
+
+.movie-list ol {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.movie-list li {
+    flex: 1 0 auto; /* This allows the items to grow and shrink as needed */
+    margin: 30px; /* Add some margin around each item for spacing */
+    
 }
