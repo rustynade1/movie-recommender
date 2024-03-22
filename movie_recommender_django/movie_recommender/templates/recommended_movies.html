@@ -69,23 +69,24 @@
   </nav>
   <h1 id="movie-review-h1">Movie Recommendations</h1>
   <div class="movie-list">
-    {% comment %}
     <ol>
-      {% for item in reviews %}
+      {% for item in recommended_movies %}
       <li>
         <div
           class="review-item"
-          style="background-image: url('{{ item.poster_image_url }}');"
+          style="background-image: url('https://image.tmdb.org/t/p/original{{ item.poster_image_url }}');"
         >
           <div class="review-details">
             <h3>{{ item.title }}</h3>
+            {% comment %}
             <p>{{ item.genre }} | {{ item.rating }}</p>
+            {% endcomment %}
           </div>
         </div>
       </li>
       {% endfor %}
     </ol>
-    {% endcomment %}
+    {% comment %}
     <ol>
       <li>
         <div
@@ -153,5 +154,6 @@
         </div>
       </li>
     </ol>
+    {% endcomment %}
   </div>
 </body>
