@@ -58,6 +58,9 @@ recommend_movie <- function (review_array){
       # Remove all neutral words
       afinn_sa <- get_sentiment(word_vector, method="afinn")
       afinn_sa_no_neutral <- afinn_sa[afinn_sa != 0]
+      if (length(afinn_sa_no_neutral) == 0) {
+        afinn_sa_no_neutral <- c(afinn_sa_no_neutral, 0)
+      }
       print(afinn_sa_no_neutral)
       
       # Normalize score
