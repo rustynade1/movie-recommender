@@ -58,3 +58,8 @@ body {
     margin: 30px; /* Add some margin around each item for spacing */
     
 }
+
+#movie-review-h1 {
+    color: 	#E50914;
+    font-family: 'Rammetto One';
+}

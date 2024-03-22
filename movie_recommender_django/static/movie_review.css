@@ -41,15 +41,20 @@ form {
 }
 
 .ui-autocomplete {
-    background-color: rgba(0, 0, 0, 0.7); /* Translucent dark background */
-    color: white; /* Text color */
-    border: 1px solid #ccc; /* Optional: Add a border */
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: white; 
+    border: 1px solid #ccc; /
 }
 
 .ui-autocomplete .ui-menu-item {
-    border-bottom: 1px solid #ccc; /* Optional: Add a border between items */
+    border-bottom: 1px solid #ccc; 
 }
 
 .ui-autocomplete .ui-menu-item:last-child {
-    border-bottom: none; /* Remove border from the last item */
+    border-bottom: none; 
+}
+
+.disabled {
+    background-color: #cccccc; 
+    cursor: not-allowed; 
 }

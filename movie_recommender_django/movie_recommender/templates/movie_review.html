@@ -79,6 +79,7 @@
         type="text"
         id="movie-title"
         name="movie-title"
+        required
       />
       <ul id="suggestions"></ul>
       <label class="form-label" for="movie-review">Movie Review:</label>
@@ -87,6 +88,7 @@
         type="text"
         id="movie-review"
         name="movie-review"
+        required
       ></textarea>
       <div class="center-btn">
         <button id="submit-review-btn" type="submit">
@@ -96,10 +98,37 @@
     </form>
     <script>
       $(function () {
-        $("#movie-title").autocomplete({
-          source: "{% url 'suggest_movies' %}",
-          minLength: 2,
-        });
+        var validSelection = false;
+        $("#movie-title")
+          .autocomplete({
+            source: "{% url 'suggest_movies' %}",
+            minLength: 2,
+            select: function (event, ui) {
+              validSelection = true; // Set the flag to true when a selection is made
+              var submitButton = $("#submit-review-btn");
+              submitButton.prop("disabled", false); // Enable the submit button
+              submitButton.removeClass("disabled");
+              $("#movie-title").val(ui.item.value); // Set the input value to the selected item
+              return false; // Prevent the default action
+            },
+          })
+          .on("input", function () {
+            validSelection = false; // Reset the flag when the input field value is changed
+          });
+
+        function checkValidSelection() {
+          console.log(validSelection);
+          var submitButton = $("#submit-review-btn");
+          if (validSelection) {
+            submitButton.prop("disabled", false); // Enable the submit button
+            submitButton.removeClass("disabled");
+          } else {
+            submitButton.prop("disabled", true); // Disable the submit button
+            submitButton.addClass("disabled");
+          }
+        }
+        $("#movie-title").on("input", checkValidSelection);
+        checkValidSelection();
       });
     </script>
   </body>
