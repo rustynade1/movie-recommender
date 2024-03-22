@@ -1,0 +1,60 @@
+.review-item {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    width: 300px;
+    height: 500px;
+}
+   
+.review-details {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent white background */
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-img {
+    width: 100%;
+    height: 100%;
+    background: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg')
+}
+
+#title-h1 {
+    color: 	#E50914;
+    font-family: 'Rammetto One';
+}
+
+body {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1B1212 !important;
+    flex-direction: column;
+    color: white !important;
+    font-family: 'Noto Sans Mono' !important;
+    padding-top: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+.movie-list {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    gap: 10px; /* Adjust the gap between items as needed */
+    width: 80%;
+}
+
+.movie-list ol {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.movie-list li {
+    flex: 1 0 auto; /* This allows the items to grow and shrink as needed */
+    margin: 30px; /* Add some margin around each item for spacing */
+    
+}

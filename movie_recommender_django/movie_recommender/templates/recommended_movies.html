@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Movie Recommender</title>
-    <link rel="stylesheet" href="{% static 'past_reviews.css' %}" />
+    <link rel="stylesheet" href="{% static 'recommended_movies.css' %}" />
     <link rel="stylesheet" href="{% static 'navbar.css' %}" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -67,59 +67,91 @@
       </div>
     </div>
   </nav>
-  <h1 id="movie-review-h1">Previous Reviews</h1>
-  {% comment %}
-  <ol>
-    {% for item in reviews %}
-    <li>
-      <div
-        class="review-item"
-        style="background-image: url('{{ item.poster_image_url }}');"
-      >
-        <div class="review-details">
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.genre }} | {{ item.rating }}</p>
-          <p>{{ item.review_text|truncatewords:10 }}</p>
+  <h1 id="movie-review-h1">Movie Recommendations</h1>
+  <div class="movie-list">
+    {% comment %}
+    <ol>
+      {% for item in reviews %}
+      <li>
+        <div
+          class="review-item"
+          style="background-image: url('{{ item.poster_image_url }}');"
+        >
+          <div class="review-details">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.genre }} | {{ item.rating }}</p>
+          </div>
         </div>
-      </div>
-    </li>
-    {% endfor %}
-  </ol>
-  {% endcomment %}
-  <ol>
-    <li>
-      <div
-        class="review-item"
-        style="
-          background-image: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg');
-        "
-      >
-        <div class="review-details">
-          <h3>Movie 1</h3>
-          <p>Action | 8.5</p>
-          <p>
-            This is a great action movie with lots of thrilling scenes. It's a
-            must-watch for action fans.
-          </p>
+      </li>
+      {% endfor %}
+    </ol>
+    {% endcomment %}
+    <ol>
+      <li>
+        <div
+          class="review-item"
+          style="
+            background-image: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg');
+          "
+        >
+          <div class="review-details">
+            <h3>Movie 1</h3>
+            <p>Action | 8.5</p>
+          </div>
         </div>
-      </div>
-    </li>
-    <li>
-      <div
-        class="review-item"
-        style="
-          background-image: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg');
-        "
-      >
-        <div class="review-details">
-          <h3>Movie 2</h3>
-          <p>Comedy | 7.8</p>
-          <p>
-            A hilarious comedy that will make you laugh out loud. Perfect for a
-            night in.
-          </p>
+      </li>
+      <li>
+        <div
+          class="review-item"
+          style="
+            background-image: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg');
+          "
+        >
+          <div class="review-details">
+            <h3>Movie 2</h3>
+            <p>Comedy | 7.8</p>
+          </div>
         </div>
-      </div>
-    </li>
-  </ol>
+      </li>
+      <li>
+        <div
+          class="review-item"
+          style="
+            background-image: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg');
+          "
+        >
+          <div class="review-details">
+            <h3>Movie 3</h3>
+            <p>Drama | 9.0</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div
+          class="review-item"
+          style="
+            background-image: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg');
+          "
+        >
+          <div class="review-details">
+            <h3>Movie 4</h3>
+            <p>Sci-Fi | 8.2</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div
+          class="review-item"
+          style="
+            background-image: url('https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg');
+          "
+        >
+          <div class="review-details">
+            <h3>Movie 5</h3>
+            <p>Romance | 7.5</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
 </body>
