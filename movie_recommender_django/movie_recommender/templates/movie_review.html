@@ -2,41 +2,105 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Movie Recommender</title>
-    <link rel="stylesheet" href="{% static 'movie_review.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Rammetto+One&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'movie_review.css' %}" />
+    <link rel="stylesheet" href="{% static 'navbar.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Rammetto+One&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-</head>
-<body>
-    <h1 id="movie-review-h1">Write a Movie Review</h1>
-    <form id = 'movie-review-form'action="{% url 'recommend_movie' %}" method="post">
-    {% csrf_token %}
-        <label class="form-label" for="movie-title">Movie Title:</label>
-        <input class="form-control" type="text" id="movie-title" name="movie-title">
-        <ul id="suggestions"></ul>
-        <label class="form-label" for="movie-review">Movie Review:</label>
-        <textarea class="form-control" type="text" id="movie-review" name="movie-review"></textarea>
-        <div class="center-btn">
-            <button id="submit-review-btn" type="submit"><i class="fa fa-paper-plane"></i>Submit</button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+      <div class="container-fluid">
+        <span class="navbar-brand">Movie Recommender</span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/recommend_movie/">Write Review</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/past_reviews/">View Past Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/recommendations_page/"
+                >Get Movie Recommendations</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
+
+    <h1 id="movie-review-h1">Write a Movie Review</h1>
+
+    <form
+      id="movie-review-form"
+      action="{% url 'recommend_movie' %}"
+      method="post"
+    >
+      {% csrf_token %}
+      <label class="form-label" for="movie-title">Movie Title:</label>
+      <input
+        class="form-control"
+        type="text"
+        id="movie-title"
+        name="movie-title"
+      />
+      <ul id="suggestions"></ul>
+      <label class="form-label" for="movie-review">Movie Review:</label>
+      <textarea
+        class="form-control"
+        type="text"
+        id="movie-review"
+        name="movie-review"
+      ></textarea>
+      <div class="center-btn">
+        <button id="submit-review-btn" type="submit">
+          <i class="fa fa-paper-plane"></i>Submit
+        </button>
+      </div>
     </form>
     <script>
-        $(function() {
-            $("#movie-title").autocomplete({
-                source: "{% url 'suggest_movies' %}",
-                minLength: 2,
-            });
+      $(function () {
+        $("#movie-title").autocomplete({
+          source: "{% url 'suggest_movies' %}",
+          minLength: 2,
         });
+      });
     </script>
-
-</body>
+  </body>
 </html>

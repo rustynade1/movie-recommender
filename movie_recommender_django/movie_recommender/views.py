@@ -74,6 +74,11 @@ def past_reviews(request):
     #link for missing incase need https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg
     return render(request, 'past_reviews.html', ) # {'reaction':result[0][0],'result': list(result[1])} similar to this 
 
+def recommendations_page(request):
+    #state list of recommended movies here
+    #link for missing incase need https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg
+    return render(request, 'recommended_movies.html', ) # {'reaction':result[0][0],'result': list(result[1])} similar to this 
+
 class AutocompleteView(View):
     def get(self, request):
         query = request.GET.get('term', '')
