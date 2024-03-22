@@ -134,7 +134,63 @@ def past_reviews(request):
 def recommendations_page(request):
     #state list of recommended movies here
     #link for missing incase need https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg
-    return render(request, 'recommended_movies.html', ) # {'reaction':result[0][0],'result': list(result[1])} similar to this 
+
+    print(settings.BASE_DIR)
+    with open(r_script_path, 'r') as file:
+        r_script = file.read()
+
+    r(r_script)
+
+    empty = os.stat(csv_file_path).st_size == 0
+    current_reviews = []
+
+    # Get previous reviews
+    if not empty:
+        # Open the CSV file
+        with open(csv_file_path, mode='r', newline='', encoding='cp1252') as file:
+
+            reader = csv.DictReader(file)
+
+            for row in reader:
+                current_reviews.append(row)
+
+    reviews_json = json.dumps(current_reviews)
+    result = r.recommend_movie(reviews_json)
+    result_list = str(result)
+    result_json = json.loads(result_list)
+    print("RESULT")
+    print(result_json[0][0])
+    print(type(result_json[0][0]['genre']))
+    print(result_json[0][0]['poster_path'])
+
+    result_dict = result_json[0][0]
+    # rating = result_dict['genres'][0]
+    # print("KEYWORD genre TEST: ")
+    # print(rating)
+
+    recommended_movies = []
+
+    for movie in result_json[1]:
+        # # Parse the genre string into a Python list of dictionaries
+        # genre_list = json.loads(movie['genres'])
+        
+        # # Extract the 'name' of each genre into a list
+        # genre_names = [genre['name'] for genre in genre_list]
+        
+        # # Join the genre names into a single string, separated by commas
+        # genre_string = ', '.join(genre_names)
+
+        movie_details = {
+            "title": movie['title'],
+            # "genre": genre_string, # Assuming genre is a string or can be directly converted to a string
+            # "rating": movie['rating'],
+            "poster_image_url": movie['poster_path'],
+        }
+        recommended_movies.append(movie_details)
+    
+    print("RECOMMENDED MOVIES: ")
+    print(recommended_movies)
+    return render(request, 'recommended_movies.html', {'recommended_movies': recommended_movies}) # {'reaction':result[0][0],'result': list(result[1])} similar to this 
 
 class AutocompleteView(View):
     def get(self, request):
