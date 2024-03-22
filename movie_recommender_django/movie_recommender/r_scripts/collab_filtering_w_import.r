@@ -76,7 +76,7 @@ recommend_movie <- function (review_array){
   }
   
   ratings_arr <- review_cleaning(review_array)
-  
+
   # -- COLLABORATIVE FILTERING --
   print(getwd())
   print("Reading files")
@@ -87,7 +87,7 @@ recommend_movie <- function (review_array){
 
   
   movies_df <- movies_df[!duplicated(movies_df$title), ]
-  movies_df <- movies_df[, c("title", "imdb_id")]
+  movies_df <- movies_df[, c("title", "imdb_id", "genres", "poster_path", "overview")]
   ratings_df <- ratings_df[, c("userId", "movieId", "rating")]
   
   # Match the IMDB ID format in links_df
@@ -120,12 +120,19 @@ recommend_movie <- function (review_array){
       print(ratings_arr[i])
       movie_title <- review_array[i, "title"]
       user_input <- data.frame(userId = user_index+1, title = movie_title, rating = ratings_arr[i])
+      ratings_info <- append(ratings_info, user_index)
       df_copy <- rbind(df_copy,user_input) 
     }
     return(df_copy)
   }
-  
-  
+
+  ratings_info <- list()
+  for (i in 1:nrow(review_array)) {
+      movie_title <- review_array[i, "title"]
+      user_input <- data.frame(title = movie_title, rating = ratings_arr[i])
+      ratings_info <- append(ratings_info, user_input)
+  }
+
   rearranged_df <- append_user_review(last_value, rearranged_df)
   print(tail(rearranged_df,10))
   rating_matrix <- as(rearranged_df, "realRatingMatrix")
@@ -150,6 +157,11 @@ recommend_movie <- function (review_array){
   top_movies_of_user <- as(prediction_w_user, "list")
   movie_list <- top_movies_of_user[[nrow(filtered_rating_matrix)]]
   print(movie_list)
-  return (movie_list)
+  matched_records <- movies_df[movies_df$title %in% movie_list, ]
+  print(matched_records)
+  ratings_json <- ratings_info
+  matched_records_json <- matched_records
+  result <- list(ratings_json, matched_records_json)
+  return (toJSON(result))
 }
 

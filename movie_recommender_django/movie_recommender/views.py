@@ -46,13 +46,14 @@ def recommend_movie (request):
         # Get previous reviews
         if not empty:
             # Open the CSV file
-            with open(csv_file_path, mode='r', newline='') as file:
+            with open(csv_file_path, mode='r', newline='', encoding='cp1252') as file:
 
                 reader = csv.DictReader(file)
 
                 for row in reader:
                     current_reviews.append(row)
 
+        new = True
         # Check for duplicates
         for review in current_reviews:
             if review['title'] == movie_title:
@@ -71,16 +72,22 @@ def recommend_movie (request):
         # Write down recommendations
         for review in current_reviews:
             if review['title'] == movie_title:
-                review['recommendations'] = list(result)
+                review['recommendations'] = result
                 break
 
         # Rewrite past_reviews file
-        with open(csv_file_path, mode='w', newline='', encoding='Windows-1252') as file:
+        with open(csv_file_path, mode='w', newline='', encoding='cp1252') as file:
             writer = csv.DictWriter(file, fieldnames=current_reviews[0].keys())
             writer.writeheader()
             writer.writerows(current_reviews)
 
-        return render(request, 'recommendation_results.html', {'reaction':"Awesome! Here are some movies that are watched by users like you!",'result': list(result)})
+        result_list = str(result)
+        result_json = json.loads(result_list)
+
+        print(type(result_json[0]))
+
+        titles = [item['title'] for item in result_json[1]]
+        return render(request, 'recommendation_results.html', {'reaction':"Awesome! Here are some movies that are watched by users like you!",'result': titles})
     else:
         return render(request, 'movie_review.html')
 
